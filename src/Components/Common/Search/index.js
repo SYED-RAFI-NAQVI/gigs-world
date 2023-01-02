@@ -10,13 +10,6 @@ function AutocompleteSearch({ label, setDomain }) {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedDomain, setSelectedDomain] = useState("");
 
-  const handleChange = async () => {
-    const response = await axios.get(
-      `https://suggestions.semrush.com/?type=domain&q=${searchTerm}`
-    );
-    setSearchResults(response.data.results);
-  };
-
   const handleDomainClick = (domain) => {
     setSelectedDomain(domain);
     setDomain(domain);
@@ -24,6 +17,12 @@ function AutocompleteSearch({ label, setDomain }) {
   };
 
   useEffect(() => {
+    const handleChange = async () => {
+      const response = await axios.get(
+        `https://suggestions.semrush.com/?type=domain&q=${searchTerm}`
+      );
+      setSearchResults(response.data.results);
+    };
     handleChange();
   }, [searchTerm]);
 

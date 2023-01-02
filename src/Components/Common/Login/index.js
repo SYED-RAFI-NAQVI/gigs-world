@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Typography } from "@mui/material";
@@ -12,19 +12,22 @@ const Login = () => {
   }
 
   useEffect(() => {
-    window.google.accounts.id.initialize({
-      client_id:
-        "832520484394-9ckm81a9hfqbeq81dd8n12n4qpad2v2j.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    window.google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {
-        theme: "outline",
-        size: "medium",
-      }
-    );
-  }, []);
+    const googleSingin = () => {
+      window.google.accounts.id.initialize({
+        client_id:
+          "832520484394-9ckm81a9hfqbeq81dd8n12n4qpad2v2j.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+      window.google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {
+          theme: "outline",
+          size: "medium",
+        }
+      );
+    };
+    googleSingin();
+  });
 
   return (
     <Grid
